@@ -22,6 +22,10 @@ router
 .patch(usersController.updateUser);
 
 router
+.route("/:delete/:id")
+.delete(usersController.deleteUser);
+
+router
 .route("/:id")
 .get(usersController.getUserDetails);
 
