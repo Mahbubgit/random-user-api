@@ -13,7 +13,16 @@ router
 .route("/:random")
 .get(usersController.getRandomUser);
 
+router
+.route("/:save")
+.post(usersController.saveAUser);
 
-router.route("/:id").get(usersController.getUserDetails);
+router
+.route("/:update/:id")
+.patch(usersController.updateUser);
+
+router
+.route("/:id")
+.get(usersController.getUserDetails);
 
 module.exports = router;

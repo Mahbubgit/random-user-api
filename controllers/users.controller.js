@@ -61,29 +61,43 @@ const users = [
 
 module.exports.loadUser = async (req, res) => {
     // let data = await fetch('../data/users.json');
-    users = data;
+    // users = await data.json();
     res.send(users);
 }
+// Show random user API
 module.exports.getRandomUser = (req, res) => {
     const userId = random.int((min = 1), (max = 7));
     console.log(userId);
     const randomUser = users.find(user => user.id === Number(userId));
     res.send(randomUser);
 }
+// Show all user API
 module.exports.getAllUsers = async (req, res, next) => {
-    // let data = await fetch('../data/users.json');
-    // users = await data.json();
-
     const { limit } = req.query;
     res.send(users.slice(0, limit));
 };
-
+// Show an user detail API
 module.exports.getUserDetails = async (req, res) => {
-    // let data = await fetch('../data/users.json');
-    // users = await data.json();
-
     const { id } = req.params;
     console.log(id);
     const findUser = users.find(user => user.id === Number(id));
     res.send(findUser);
+};
+// Add a user API
+module.exports.saveAUser = (req, res) => {
+    const userId = random.int((min = 1), (max = 7));
+    const randomUser = users.find(user => user.id === Number(userId));
+    // console.log(req.query);
+    // users.push(req.body);
+    users.push(randomUser);
+    res.send(users);
+};
+// Update API
+module.exports.updateUser = (req, res) => {
+    const { id } = req.params;
+    const newUser = users.find(user => user.id === Number(id));
+
+    newUser.id = id;
+    newUser.name = req.body.name;
+    res.send(newUser);
 };
